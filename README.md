@@ -54,3 +54,48 @@ curl -X POST http://localhost:PORT/users/register \
 ```
 
 ---
+
+# User Login Endpoint Documentation
+
+## Endpoint
+
+`POST /users/login`
+
+## Description
+
+Authenticates a user with email and password. If credentials are valid, returns a JWT token and user data.
+
+## Request Body
+
+Send a JSON object with the following structure:
+
+```json
+{
+  "email": "user@example.com",
+  "password": "yourpassword"
+}
+```
+
+### Field Requirements
+
+- **email**: Must be a valid email address.
+- **password**: Minimum 6 characters.
+
+## Responses
+
+| Status Code | Description                       | Response Example                                                        |
+| ----------- | --------------------------------- | ----------------------------------------------------------------------- |
+| 200         | Login successful                  | `{ "token": "...", "message": "Login successful", "user": { ... } }`    |
+| 400         | Validation error or invalid login | `{ "errors": [ ... ] }` or `{ "message": "Invalid email or password" }` |
+| 500         | Internal server error             | `{ "message": "Internal server error" }`                                |
+
+## Example Request
+
+```bash
+curl -X POST http://localhost:PORT/users/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "yourpassword"
+  }'
+```
