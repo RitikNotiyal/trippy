@@ -83,11 +83,11 @@ Send a JSON object with the following structure:
 
 ## Responses
 
-| Status Code | Description                       | Response Example                                                        |
-| ----------- | --------------------------------- | ----------------------------------------------------------------------- |
-| 200         | Login successful                  | `{ "token": "...", "message": "Login successful", "user": { ... } }`    |
-| 400         | Validation error or invalid login | `{ "errors": [ ... ] }` or `{ "message": "Invalid email or password" }` |
-| 500         | Internal server error             | `{ "message": "Internal server error" }`                                |
+| Status Code | Description                        | Response Example                                                    |
+| ----------- | ---------------------------------- | ------------------------------------------------------------------- |
+| 200         | Login successful                   | `{ "token": "...", "message": "Login successful", "user": { ... } }`|
+| 400         | Validation error or invalid login  | `{ "errors": [ ... ] }` or `{ "message": "Invalid email or password" }` |
+| 500         | Internal server error              | `{ "message": "Internal server error" }`                            |
 
 ## Example Request
 
@@ -98,4 +98,64 @@ curl -X POST http://localhost:PORT/users/login \
     "email": "user@example.com",
     "password": "yourpassword"
   }'
+```
+
+---
+
+# User Profile Endpoint Documentation
+
+## Endpoint
+
+`GET /users/profile`
+
+## Description
+
+Returns the authenticated user's profile information. Requires a valid JWT token (sent as a cookie or in the `Authorization` header).
+
+## Authentication
+
+- **Required**: Yes (JWT token via cookie or `Authorization: Bearer <token>` header)
+
+## Responses
+
+| Status Code | Description                | Response Example                |
+| ----------- | -------------------------- | ------------------------------- |
+| 200         | Returns user profile       | `{ "_id": "...", "email": "...", "fullname": { ... }, ... }` |
+| 401         | Unauthorized (no/invalid token) | `{ "message": "Unauthorized access" }` |
+
+## Example Request
+
+```bash
+curl -X GET http://localhost:PORT/users/profile \
+  -H "Authorization: Bearer <your_jwt_token>"
+```
+
+---
+
+# User Logout Endpoint Documentation
+
+## Endpoint
+
+`GET /users/logout`
+
+## Description
+
+Logs out the authenticated user by blacklisting the current JWT token and clearing the authentication cookie.
+
+## Authentication
+
+- **Required**: Yes (JWT token via cookie or `Authorization` header)
+
+## Responses
+
+| Status Code | Description                | Response Example                        |
+| ----------- | -------------------------- | --------------------------------------- |
+| 200         | Logout successful          | `{ "message": "Logout successful" }`    |
+| 401         | Unauthorized (no/invalid token) | `{ "message": "Unauthorized access" }` |
+
+## Example Request
+
+```bash
+curl -X GET http://localhost:PORT/users/logout \
+  -H "Authorization: Bearer <your_jwt_token>"
 ```
