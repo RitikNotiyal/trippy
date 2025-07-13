@@ -329,6 +329,7 @@ curl -X GET http://localhost:PORT/captains/profile \
     // ...other fields
   }
 }
+```
 ---
 ## Captain Logout
 
