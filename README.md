@@ -326,7 +326,6 @@ curl -X GET http://localhost:PORT/captains/profile \
       "regNo": "DL01AB1234",
       "vehicalType": "car"
     }
-    // ...other fields
   }
 }
 ```
