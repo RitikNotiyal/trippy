@@ -1,19 +1,32 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { UserContextProvider } from '../conetxt/UserContext'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const UserLogin = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [userData, setUserData] = useState()
+    const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContextProvider);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
-        setUserData({
+        const user = {
             email: email,
             password: password
-        })
+        }
+
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, user)
+
+        if (response.status === 200) {
+            const data = response.data
+            setUser(data.user)
+            localStorage.setItem('token', data.token)
+            navigate('/home')
+        }
 
         // Reset form fields after submission
         setEmail('')
@@ -69,7 +82,7 @@ const UserLogin = () => {
                 </div>
             </div>
         </div>
-)
+    )
 }
 
 export default UserLogin

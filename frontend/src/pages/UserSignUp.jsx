@@ -1,15 +1,17 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import axios from 'axios'
+import { UserContextProvider } from '../conetxt/UserContext'
 
 const UserSignUp = () => {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [userData, setUserData] = useState({})
     const navigate = useNavigate();
+    const { user, setUser } = useContext(UserContextProvider);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const data = {
@@ -21,12 +23,24 @@ const UserSignUp = () => {
             password
         };
 
-        setUserData(data);
-        // Reset form
-        setFirstName('');
-        setLastName('');
-        setEmail('');
-        setPassword('');
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/register`, data);
+            if (response.status === 201) {
+                const data = response.data;
+                setUser(data.user)
+                localStorage.setItem('token', data.token)
+                navigate('/home')
+            }
+            // Reset form
+            setFirstName('');
+            setLastName('');
+            setEmail('');
+            setPassword('');
+        } catch (error) {
+            console.error("Error during signup:", error);
+        }
+
+
     };
 
     return (
