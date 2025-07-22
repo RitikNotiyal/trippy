@@ -32,7 +32,7 @@ try {
     // generate a JWT token
     const token = newUser.generateAuthToken();
 
-    res.status(201).json({ token, message: 'User registered successfully', newUser });
+    res.status(201).json({ token, message: 'User registered successfully', newUser, token });
 } catch (error) {
     console.error('Error during registration:', error);
     res.status(500).json({ message: 'Internal server error' });
@@ -61,7 +61,7 @@ if (!errors.isEmpty()) {
         const token = user.generateAuthToken();
         // Set the token in a cookie
         res.cookie('token', token);
-        res.status(200).json({ message: 'Login successful', user });
+        res.status(200).json({ message: 'Login successful', user, token });
     } catch (error) {
         console.error('Error during login:', error);
         return res.status(500).json({ message: 'Internal server error' });
