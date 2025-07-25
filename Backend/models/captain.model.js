@@ -102,7 +102,6 @@ captainSchema.pre('save', async function (next) {
 
 // Method to compare passwords
 captainSchema.methods.comparePassword = async function (candidatePassword) {
-    console.log('Comparing:', candidatePassword, 'with hash:', this.password);
     return await bcrypt.compare(candidatePassword, this.password);
 }
 

@@ -32,7 +32,7 @@ try {
     // generate a JWT token
     const token = newUser.generateAuthToken();
 
-    res.status(201).json({ token, message: 'User registered successfully', newUser, token });
+    res.status(201).json({ message: 'User registered successfully', newUser, token });
 } catch (error) {
     console.error('Error during registration:', error);
     res.status(500).json({ message: 'Internal server error' });

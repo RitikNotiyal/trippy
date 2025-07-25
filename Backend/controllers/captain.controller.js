@@ -42,8 +42,8 @@ const token = newCaptain.generateAuthToken();
 
 res.status(201).json({ token, message: 'Captain registered successfully', newCaptain });
 } catch (error) {
-console.error('Error during registration:', error);
-res.status(500).json({ message: 'Internal server error' });
+
+res.status(500).json({ message: 'Internal server error', error });
 }
 }
 
@@ -102,7 +102,6 @@ module.exports.logout = async (req, res) => {
         res.clearCookie('token');
         res.status(200).json({ message: 'Logout successful' });
     } catch (error) {
-        console.error('Error during logout:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: 'Internal server error', error });
     }
 } 
