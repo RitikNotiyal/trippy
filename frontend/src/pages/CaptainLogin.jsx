@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { CaptainContextProvider } from '../conetxt/CaptainContext'
 import logo from '../assets/images/captain-logo.png'
 
@@ -18,7 +18,7 @@ const CaptainLogin = () => {
         setError(null)
         setDisable(true)
 
-        if (!email || !password) { 
+        if (!email || !password) {
             setError("Email and password are required.");
             return;
         }
@@ -28,7 +28,7 @@ const CaptainLogin = () => {
             password: password
         }
 
-        try { 
+        try {
             const response = await axios.post(`${import.meta.env.VITE_API_URL}/captains/login`, captain)
 
             if (response.status === 200) {
@@ -58,7 +58,7 @@ const CaptainLogin = () => {
             setPassword('');
             setDisable(false)
         }
-        
+
     }
 
     return (
