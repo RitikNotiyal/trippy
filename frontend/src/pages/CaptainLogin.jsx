@@ -6,12 +6,12 @@ import logo from '../assets/images/captain-logo.png'
 
 const CaptainLogin = () => {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [captainData, setCaptainData] = useState()
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [captainData, setCaptainData] = useState();
     const [error, setError] = useState(null);
-    const [disable, setDisable] = useState(false)
-    const navigate = useNavigate()
+    const [disable, setDisable] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -57,10 +57,8 @@ const CaptainLogin = () => {
             setEmail('');
             setPassword('');
             setDisable(false)
-        }
-
+        } 
     }
-
     return (
         <div className="h-screen w-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center px-4">
             <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 flex flex-col justify-between h-[90vh]">
@@ -80,7 +78,6 @@ const CaptainLogin = () => {
                             required
                             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 mb-6 text-base placeholder:text-gray-400"
                         />
-
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
                             What's your password?
                         </label>
@@ -92,7 +89,6 @@ const CaptainLogin = () => {
                             required
                             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-400 mb-6 text-base placeholder:text-gray-400"
                         />
-
                         <button
                             type="submit"
                             className={`w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition
@@ -101,7 +97,6 @@ const CaptainLogin = () => {
                         >
                             {disable ? 'Logging in...' : 'Login'}
                         </button>
-
                         <p className="text-center text-sm text-gray-600 mt-4">
                             Join the fleet?{" "}
                             <Link to="/captain-signup" className="text-blue-500 hover:underline">
@@ -110,7 +105,6 @@ const CaptainLogin = () => {
                         </p>
                     </form>
                 </div>
-
                 <div className="mt-6">
                     <Link to="/user-login">
                         <button className="w-full bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600 transition">
@@ -120,7 +114,6 @@ const CaptainLogin = () => {
                 </div>
             </div>
         </div>
-
     )
 }
 
